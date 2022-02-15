@@ -1,9 +1,9 @@
 <div class="container">
 
-  <header>
-    <a href="/" class="logo"><i class="fas fa-bible"></i></a>
+  <header class="home">
+    <a href="/" class="logo home"><i class="fas fa-bible"></i></a>
     <h1>SCRIPTURLE</h1>
-    <a href="" class="settings"><i class="fas fa-cog"></i></a>
+    <a href="" class="settings home"><i class="fas fa-cog"></i></a>
   </header>
 
   <main>
@@ -15,16 +15,14 @@
 
     <div class="row">
       {{#each result}}
-
         <input
         type="text"
         text=""
-        class="letter {{this}}"
+        class="letter {{answer}}"
         maxlength="1"
         disabled
-        value="T"
+        value="{{guess}}"
       />
-
       {{/each}}
     </div>
     <div class="row">

@@ -11,9 +11,18 @@ app.use(express.static(path.join(__dirname, "public")));
 // parse urlencoded request body
 app.use(express.urlencoded({ extended: true }));
 
+
+app.get("/", (req, res) => {
+  res.render('home');
+});
+
+
+
 app.get('/v1', (req, res)=> {
   res.render('v1');
 });
+
+
 
 app.post("/v1", (req, res)=> {
 
@@ -21,21 +30,37 @@ app.post("/v1", (req, res)=> {
 
   // extract the guess value from the body
   const guess = req.body.guess.toUpperCase();
+  let guessword = [];
 
-  let result = []; // = computeResult();
-
-  if(guess === secretWord) {
-    result = ['correct', 'correct', 'correct','correct','correct','correct','correct'];
+  let num = 0;
+  let result = []; 
+  for (num = 0; num < 7; num++) {
+    guessword[num] = guess[num];
+    console.log(guessword[num]);
+    if (secretWord.includes(guess[num])) {
+      if (guess[num] == secretWord[num]) {
+        result[num] = {guess: guess[num], answer: 'correct'};
+      }
+      else {
+        result[num] = {guess: guess[num], answer: 'misplaced'};
+      }
+    }
+    else {
+      result[num] = {guess: guess[num], answer: 'incorrect'};
+    }
   }
-  else {
-    result = ['correct', 'misplaced', 'incorrect','incorrect','incorrect','misplaced','misplaced'];
-  }
+// = computeResult();
 
-  console.log(result);
+ // if(guess === secretWord) {
+  //result = ['correct', 'correct', 'correct','correct','correct','correct','correct'];
+//}
+//else {
+ // result = ['correct', 'misplaced', 'incorrect','incorrect','incorrect','misplaced','misplaced'];
+//}
+
 
   // return the guess
-  res.render('v1', {result: result} ) ;
-
+  res.render('v1', {result: result} );
 });
 
 
