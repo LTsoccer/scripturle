@@ -90,3 +90,10 @@ input[type="submit"] {
     margin: 20px;
     padding: 20px;
 }
+
+.message {
+    margin: 20px;
+    padding: 20px;
+    font-size: 2rem;
+    text-align: center;
+}
